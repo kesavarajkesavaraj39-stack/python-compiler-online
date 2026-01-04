@@ -12,11 +12,12 @@ socketio = SocketIO(app)
 process = None
 
 def read_output(pipe):
-    """Reads data from the process and sends it to the web browser."""
+    """Reads data LINE-BY-LINE to fix Emojis and Buffering."""
     try:
-        # Read 1 byte at a time to ensure real-time character delivery
-        for char in iter(lambda: pipe.read(1), b''):
-            socketio.emit('output', {'data': char.decode('utf-8', errors='ignore'), 'type': 'stdout'})
+        # Change read(1) to readline (Read whole line at once)
+        for line in iter(pipe.readline, b''):
+            # Decode the whole line safely
+            socketio.emit('output', {'data': line.decode('utf-8', errors='replace'), 'type': 'stdout'})
     except Exception:
         pass
     finally:
@@ -46,7 +47,7 @@ def run_code(data):
             stdout=subprocess.PIPE, 
             stderr=subprocess.STDOUT,  # Merge channels
             text=False,     
-            bufsize=0,       
+            bufsize=1,       
             env=my_env      # <--- Apply the environment fix here
         )
 
