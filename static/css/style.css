@@ -1,0 +1,137 @@
+/* --- Global Variables & Reset --- */
+:root {
+    --bg-dark: #1e1e2e;
+    --bg-panel: #282a36;
+    --accent: #bd93f9;
+    --green: #50fa7b;
+    --red: #ff5555;
+    --text: #f8f8f2;
+    --border: #44475a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- Navigation Bar --- */
+.navbar {
+    height: 60px;
+    background-color: #191a21;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.brand small { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+.controls { display: flex; align-items: center; gap: 15px; }
+
+/* Status Dot */
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #6272a4; /* Gray = Disconnected */
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+.connected { background-color: var(--green); box-shadow: 0 0 8px var(--green); }
+
+/* Run Button */
+.run-btn {
+    background: linear-gradient(135deg, #50fa7b 0%, #00b894 100%);
+    color: #1e1e2e;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.run-btn:hover { opacity: 0.9; }
+.run-btn:active { transform: scale(0.95); }
+
+/* --- Workspace Layout --- */
+.workspace {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 60px);
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+}
+.editor-panel { flex: 6; } /* Editor takes 60% width */
+.terminal-panel { flex: 4; border-right: none; background-color: #191a21;} /* Terminal takes 40% */
+
+.panel-header {
+    padding: 10px 15px;
+    background-color: var(--bg-panel);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: #8be9fd;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clear-btn {
+    background: none; border: none; color: #6272a4; cursor: pointer;
+}
+.clear-btn:hover { color: var(--red); }
+
+/* --- Editor Tweaks --- */
+.editor-container { flex: 1; overflow: hidden; }
+.CodeMirror { height: 100% !important; font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+
+/* --- Terminal Styling --- */
+#terminal {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    cursor: text;
+}
+
+.sys-msg { color: #6272a4; font-style: italic; margin-bottom: 10px; opacity: 0.7; }
+#output-log * {  /* The '*' means 'Apply to everything inside the log' */
+    margin-bottom: 4px; 
+    line-height: 1.5; 
+    word-wrap: break-word;
+    white-space: pre-wrap; 
+}
+
+/* The Invisible Input */
+#terminal-input {
+    background: transparent;
+    border: none;
+    color: var(--green);
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    width: 100%;
+}

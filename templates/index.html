@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCore </title>
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='logo.jpg.jpeg') }}">
+   
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" 
+         alt="Python Logo" 
+         style="height: 35px; margin-right: 10px;">
+    
+    <span>PyCompiler <small>PRO</small></span>
+</div>
+        <div class="controls">
+    
+            <button class="run-btn" onclick="startCode()">
+                <i class="fa-solid fa-play"></i> Run Code
+            </button>
+        </div>
+    </nav>
+
+    <div class="workspace">
+        
+        <div class="panel editor-panel">
+            <div class="panel-header">
+                <span><i class="fa-regular fa-file-code"></i> main.py</span>
+            </div>
+            <div class="editor-container">
+                <textarea id="code-editor">print("It's Me  Welcomes U.")
+                </textarea>
+            </div>
+        </div>
+
+        <div class="panel terminal-panel">
+            <div class="panel-header">
+                <span><i class="fa-solid fa-terminal"></i> OutPut</span>
+                <button class="clear-btn" onclick="clearTerminal()"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <div id="terminal" onclick="focusInput()">
+                <div id="output-log">
+                    <div class="sys-msg">Waiting for execution...</div>
+                </div>
+                <input type="text" id="terminal-input" autocomplete="off" spellcheck="false">
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
