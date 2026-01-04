@@ -40,7 +40,8 @@ def run_code(data):
 
     try:
         process = subprocess.Popen(
-            [sys.executable, "-c", code], # We removed "-u" here because we set it in env
+            # NEW LINE 42:
+            [sys.executable, "-u", "-c", code],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE, 
             stderr=subprocess.STDOUT,  # Merge channels
