@@ -12,10 +12,11 @@ socketio = SocketIO(app)
 process = None
 
 def read_output(pipe):
-    """Reads data line-by-line to fix buffering and emoji issues."""
+    """Reads output LINE-BY-LINE to ensure text appears instantly."""
     try:
-        # We use readline() instead of read(1) to get whole words/emojis at once
+        # scan for new lines instead of single characters
         for line in iter(pipe.readline, b''):
+            # decode the line and send it to the browser
             socketio.emit('output', {'data': line.decode('utf-8', errors='replace'), 'type': 'stdout'})
     except Exception:
         pass
